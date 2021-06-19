@@ -1,1 +1,1 @@
-# Patterns-CardDeliveryOrder
+# [![Build status](https://ci.appveyor.com/api/projects/status/hh83gmnp27d68mo5?svg=true)](https://ci.appveyor.com/project/MVGIC/patterns-carddeliveryorder)
