@@ -30,13 +30,19 @@ class DeliveryTest {
 
         $("[data-test-id=city] input").setValue(validUser.getCity());
         $("[data-test-id=date] input").doubleClick().sendKeys(Keys.BACK_SPACE);
-        $("[data-test-id=date] input").setValue(validUser.getDate());
+        $("[data-test-id=date] input").setValue(firstMeetingDate);
         $("[data-test-id=name] input").setValue(validUser.getName());
         $("[data-test-id=phone] input").setValue(validUser.getPhone());
         $("[data-test-id=agreement]").click();
-        $$("button").find(exactText("Забронировать")).click();
-        $("[data-test-id='notification'] .notification__content").shouldBe(visible, Duration.ofSeconds(11))
-                .shouldHave(exactText("Встреча успешно забронирована на " + validUser.getDate()));
+        $$("button").find(exactText("Запланировать")).click();
+        $("[data-test-id='success-notification'] .notification__content").shouldBe(visible, Duration.ofSeconds(11))
+                .shouldHave(exactText("Встреча успешно запланирована на " + firstMeetingDate));
+         $("[data-test-id=date] input").setValue(secondMeetingDate);
+         $$("button").find(exactText("Запланировать")).click();
+         $("[data-test-id='replan-notification'] .notification__content").shouldBe(visible, Duration.ofSeconds(11))
+                 .shouldHave(exactText("У вас уже запланирована встреча на другую дату. Перепланировать?"));
+         $$("button").find(exactText("Перепланировать")).click();
+
         // TODO: добавить логику теста в рамках которого будет выполнено планирование и перепланирование встречи.
         // Для заполнения полей формы можно использовать пользователя validUser и строки с датами в переменных
         // firstMeetingDate и secondMeetingDate. Можно также вызывать методы generateCity(locale),
