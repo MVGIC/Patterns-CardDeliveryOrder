@@ -6,6 +6,7 @@ import lombok.Value;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
+import java.util.Random;
 
 public class DataGenerator {
     private DataGenerator() {
@@ -20,13 +21,15 @@ public class DataGenerator {
     }
 
     public static String generateCity(String locale) {
-        String city = faker.address().city();
+        String[] cities = {"Красноярск", "Санкт-Петербург", "Тюмень", "Уфа", "Абакан", "Мурманск", "Воронеж"};
+        Random rnd = new Random();
+        int index = rnd.nextInt(cities.length);
 
-        return city;
+        return cities[index];
     }
 
     public static String generateName(String locale) {
-        String name = faker.name().lastName()+" "+faker.name().firstName();
+        String name = faker.name().lastName() + " " + faker.name().firstName();
 
         return name;
     }
@@ -42,8 +45,6 @@ public class DataGenerator {
         }
 
         public static UserInfo generateUser(String locale) {
-            // TODO: добавить логику для создания пользователя user с использованием методов generateCity(locale),
-            // generateName(locale), generatePhone(locale)
             Faker faker = new Faker(new Locale("ru"));
             return new UserInfo(
                     generateCity("ru"),
